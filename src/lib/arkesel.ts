@@ -3,7 +3,7 @@ import User from '@/models/User';
 import EmergencyAlert from '@/models/EmergencyAlert';
 
 const ARKESEL_API_KEY = process.env.ARKESEL_API_KEY || '';
-const ARKESEL_SENDER_ID = process.env.ARKESEL_SENDER_ID || 'AsthmaGrd';
+const ARKESEL_SENDER_ID = process.env.ARKESEL_SENDER_ID || 'Arkesel';
 const ARKESEL_API_URL = 'https://sms.arkesel.com/api/v2/sms/send';
 
 /**
@@ -246,6 +246,5 @@ export async function sendEmergencyAlert(
     };
   }
 }
-
 
 
