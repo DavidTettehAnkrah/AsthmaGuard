@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-/**
+/*
  * Protected routes that require authentication
  */
 const protectedRoutes = [
@@ -12,16 +12,15 @@ const protectedRoutes = [
   '/api/devices',
 ];
 
-/**
+/*
  * Public routes that should redirect to dashboard if authenticated
  */
 const authRoutes = ['/login', '/register'];
 
-/**
- * Middleware to protect routes and handle authentication
- * Note: Token verification is done in API routes, not here, because
- * Edge Runtime (where middleware runs) has limited Node.js compatibility
- */
+//* Middleware to protect routes and handle authentication
+//  Note: Token verification is done in API routes, not here, because
+// Edge Runtime (where middleware runs) has limited Node.js compatibility
+//
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
@@ -40,6 +39,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   
+  // Exempt device alert endpoint from JWT (ESP32 authenticates via registered deviceId)
+  if (pathname === '/api/devices/alert') {
+    return NextResponse.next();
+  }
+
   // Check if current path is protected
   const isProtectedRoute = protectedRoutes.some(route =>
     pathname.startsWith(route)
@@ -69,7 +73,7 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-/**
+/*
  * Configure which routes the middleware should run on
  */
 export const config = {
