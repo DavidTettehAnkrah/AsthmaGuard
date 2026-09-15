@@ -247,5 +247,5 @@ export async function sendEmergencyAlert(
   }
 }
 
-// Made with Bob
+
 
