@@ -5,7 +5,7 @@ import EmergencyAlert from '@/models/EmergencyAlert';
 function getArkeselConfig() {
   return {
     apiKey: process.env.ARKESEL_API_KEY || '',
-    senderId: process.env.ARKESEL_SENDER_ID || 'AsthmaGrd',
+    senderId: process.env.ARKESEL_SENDER_ID || 'Arkesel',
     apiUrl: 'https://sms.arkesel.com/api/v2/sms/send',
   };
 }
